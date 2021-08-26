@@ -25,7 +25,7 @@ var corsOptions = {
 
 
 
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 
 app.use(bodyParser.json())
 
