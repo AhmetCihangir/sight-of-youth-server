@@ -1,7 +1,7 @@
 const fs = require('fs');
 const express = require('express')
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const firebase = require("firebase/app")
