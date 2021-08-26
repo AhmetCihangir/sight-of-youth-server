@@ -50,6 +50,9 @@ const firebaseConfig = {
 firebase.default.initializeApp(firebaseConfig)
 
 
+app.get("/",(req,res) => {
+    res.send("Hello")
+})
 
 app.get("/allblogs",(req,res)=> {
   const blogs = firebase.default.firestore().collection("blogs")
