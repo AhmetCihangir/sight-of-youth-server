@@ -23,22 +23,6 @@ var corsOptionsDelegate = function (req, callback) {
 }
 
 
-app.use(
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
-app.options(
-  '*',
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
-
 
 //app.use(cors(corsOptionDelegate))
 
@@ -222,6 +206,22 @@ function authToken(req,res,next){
   })
   
 }
+
+app.use(
+  cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
+app.options(
+  '*',
+  cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
 
 
 app.listen(port, () => console.log(`Example app listening on port port!`))
