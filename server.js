@@ -11,7 +11,7 @@ require("firebase/firestore")
 require("firebase/auth")
 
 
-var whitelist = ['https://sight-of-youth.vercel.app']
+var whitelist = ['https://sight-of-youth.vercel.app/']
 var corsOptions = {
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {
