@@ -1,6 +1,6 @@
+const serverless = require("serverless-http")
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3001
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const firebase = require("firebase/app")
@@ -9,6 +9,7 @@ require("dotenv").config()
 require("firebase/firestore")
 require("firebase/auth")
 
+const port = process.env.PORT || 3001
 // var allowCrossDomain = function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', "https://sight-of-youth.vercel.app");
 //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -33,7 +34,7 @@ var corsOptions = {
 
 
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use(bodyParser.json())
 
@@ -51,7 +52,7 @@ firebase.default.initializeApp(firebaseConfig)
 
 
 app.get("/",(req,res) => {
-    res.send("Hello")
+  res.send("Hello")
 })
 
 app.get("/allblogs",(req,res)=> {
@@ -200,5 +201,6 @@ function authToken(req,res,next){
 }
 
 
-app.listen(port, () => console.log(`Example app listening on port port!`))
+// app.listen(port, () => console.log(`Example app listening on port port!`))
 
+module.exports.handler = serverless(app)
