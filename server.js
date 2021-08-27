@@ -203,4 +203,4 @@ function authToken(req,res,next){
 
 // app.listen(port, () => console.log(`Example app listening on port port!`))
 
-module.exports.handler = serverless(app)
+module.exports = app
