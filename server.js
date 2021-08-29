@@ -153,16 +153,20 @@ app.post("/addUser",(req,res) => {
     .where("email","==",req.body.email)
     .get()
     .then(item => {
-      if(item) res.sendStatus(404).send("There has already an account in this email ")
-    })
+      const items = item.docs.map(doc => ({...doc.data()}))
+      if(items.length === 0){
+        users
+        .add({
+          ...req.body,
+          role : "costumer"
+        })
+        .then(() => res.json(req.body))
+        .catch(err => res.sendStatus(404).send(err))  
 
-  users
-    .add({
-      ...req.body,
-      role : "costumer"
-    })
-    .then(() => res.json(req.body))
-    .catch(err => res.sendStatus(404).send(err))  
+      }
+
+      res.sendStatus(404).send("There has already an account in this email ")
+    }) 
 })
 
 app.get("/login",authToken,(req,res) => {
