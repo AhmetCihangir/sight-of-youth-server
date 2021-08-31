@@ -147,26 +147,22 @@ app.post("/allblogs/:id/updateBlog",(req,res)=> {
 })
 
 app.post("/addUser",(req,res) => {
+
+  if(req.body.email.includes("sight","of","youth")){
+    res.sendStatus(404).send("You can't create account!")
+  }
+
   const users = firebase.default.firestore().collection("users")
 
   users
-    .where("email","==",req.body.email)
-    .get()
-    .then(item => {
-      const items = item.docs.map(doc => ({...doc.data()}))
-      if(items.length === 0){
-        users
-        .add({
-          ...req.body,
-          role : "costumer"
-        })
-        .then(() => res.json(req.body))
-        .catch(err => res.sendStatus(404).send(err))  
+  .add({
+    ...req.body,
+    role : "costumer"
+  })
+  .then(() => res.json(req.body))
+  .catch(err => res.sendStatus(404).send(err))  
 
-      }
 
-      res.sendStatus(404).send("There has already an account in this email ")
-    }) 
 })
 
 app.get("/login",authToken,(req,res) => {
